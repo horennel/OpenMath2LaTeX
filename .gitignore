@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+config/local_settings.yml
+.DS_Store
+.idea/
+.history/
 # C extensions
 *.so
 
