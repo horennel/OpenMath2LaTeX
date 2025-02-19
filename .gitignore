@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+SQLite.db
 config/local_settings.yml
 .DS_Store
 .idea/
