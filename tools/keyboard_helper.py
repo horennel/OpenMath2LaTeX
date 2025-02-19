@@ -36,7 +36,6 @@ def get_onoff():
 
 
 def start_key_listener():
-    print('启动键盘监控。。。')
     Thread(target=get_onoff).start()
     with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
