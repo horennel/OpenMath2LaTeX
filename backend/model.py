@@ -1,4 +1,6 @@
-from peewee import SqliteDatabase, Model, CharField, FloatField, TimeField
+import datetime
+
+from peewee import SqliteDatabase, Model, CharField, FloatField, DateTimeField, SQL
 
 SqliteDB = SqliteDatabase('SQLite.db')
 
@@ -17,5 +19,5 @@ class ConfigModel(SQLiteModel):
 
 
 class HistoryModel(SQLiteModel):
-    create_time = TimeField()
+    create_time = DateTimeField(default=datetime.datetime.now)
     context = CharField()
