@@ -6,6 +6,9 @@ class OpenAIHelper(object):
         self.client = OpenAI(base_url=base_url, api_key=api_key)
         self.model = model
 
+    def __del__(self):
+        self.client.close()
+
     def chat(self, img):
         try:
             resp = self.client.chat.completions.create(
