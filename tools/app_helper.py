@@ -19,9 +19,8 @@ def get_image():
         if image.mode == 'RGBA':
             image = image.convert('RGB')
         img_byte_arr = io.BytesIO()
-        image.save(img_byte_arr, format='JPEG', quality=15)
-        img_byte_data = img_byte_arr.getvalue()
-        img_base64 = base64.b64encode(img_byte_data).decode('utf-8')
+        image.save(img_byte_arr, format='JPEG', quality=20)
+        img_base64 = base64.b64encode(img_byte_arr.getvalue()).decode('utf-8')
         return img_base64
     return None
 
@@ -33,7 +32,7 @@ def get_formula(chat_info):
 
 
 def open_settings():
-    url = "http://%s:%d/config" % (SETTINGS_HOST, SETTINGS_PORT)
+    url = f"http://{SETTINGS_HOST}:{SETTINGS_PORT}/config"
     webbrowser.open(url)
 
 

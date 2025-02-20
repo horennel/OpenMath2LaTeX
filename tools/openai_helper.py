@@ -22,7 +22,8 @@ class OpenAIHelper(object):
                             {
                                 "type": "image_url",
                                 "image_url": {
-                                    "url": "data:image/jpg;base64,%s" % img},
+                                    "url": f"data:image/jpg;base64,{img}"
+                                },
                             },
                         ],
                     }
