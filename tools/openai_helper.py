@@ -34,4 +34,4 @@ class OpenAIHelper(object):
             )
             return None, resp.choices[0].message.content
         except Exception as e:
-            return e, str(e)
+            return e, 'OpenAI: ' + str(e)
