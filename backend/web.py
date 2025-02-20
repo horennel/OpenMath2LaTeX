@@ -34,8 +34,8 @@ async def save_config(request: Request):
 
 @app.get('/history', response_class=HTMLResponse)
 async def history(request: Request):
-    keep_last_50_records()
-    hsy = HistoryModel.select()
+    keep_last_records()
+    hsy = HistoryModel.select().order_by(-HistoryModel.id)
     return templates.TemplateResponse('history.html', {
         'request': request,
         'history': hsy
@@ -50,19 +50,23 @@ def _save_config(cfg_data):
         cfg.model = cfg_data['model']
         cfg.button_time = cfg_data['button_time']
         cfg.button_select = cfg_data['button_select']
+        cfg.history_num = cfg_data['history_num']
         cfg.save()
     else:
         ConfigModel.create(base_url=cfg_data['base_url'], api_key=cfg_data['api_key'], model=cfg_data['model'],
-                           button_time=cfg_data['button_time'], button_select=cfg_data['button_select'])
+                           button_time=cfg_data['button_time'], button_select=cfg_data['button_select'],
+                           history_num=cfg_data['history_num'])
 
 
-def keep_last_50_records():
-    total_count = HistoryModel.select().count()
-    if total_count > 50:
-        query = HistoryModel.delete().where(HistoryModel.id.in_(
-            HistoryModel.select(HistoryModel.id).order_by(HistoryModel.create_time).limit(total_count - 50)
-        ))
-        query.execute()
+def keep_last_records():
+    cfg = ConfigModel.select().first()
+    if cfg:
+        total_count = HistoryModel.select().count()
+        if total_count > cfg.history_num:
+            query = HistoryModel.delete().where(HistoryModel.id.in_(
+                HistoryModel.select(HistoryModel.id).order_by(HistoryModel.create_time).limit(
+                    total_count - cfg.history_num)))
+            query.execute()
 
 
 def start_web():

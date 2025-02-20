@@ -1,6 +1,6 @@
 import datetime
 
-from peewee import SqliteDatabase, Model, CharField, FloatField, DateTimeField, SQL
+from peewee import SqliteDatabase, Model, CharField, FloatField, DateTimeField, IntegerField
 
 SqliteDB = SqliteDatabase('SQLite.db')
 
@@ -16,6 +16,7 @@ class ConfigModel(SQLiteModel):
     model = CharField()
     button_time = FloatField(null=True)
     button_select = CharField()
+    history_num = IntegerField()
 
 
 class HistoryModel(SQLiteModel):
