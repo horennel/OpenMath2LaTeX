@@ -3,7 +3,8 @@ from threading import Thread
 import rumps
 
 from tools import create_new_listener, stop_listener, open_settings, keyboard_q, get_config, MessageHelper, get_image, \
-    OpenAIHelper, to_clip, get_formula, start_key_listener, CFG_ERROR, ORC_ERROR, SUCCESS, NO_COPY_ERROR, WAIT
+    OpenAIHelper, to_clip, get_formula, start_key_listener, CFG_ERROR, ORC_ERROR, SUCCESS, NO_COPY_ERROR, WAIT, \
+    open_history, save_history
 from backend import start_web
 
 
@@ -13,7 +14,15 @@ class LatexOrcApplication(rumps.App):
         self.keyboard_listener = None
         self.keyboard_stop_event = None
 
-    @rumps.clicked("ORC on/off")
+    @rumps.clicked("Settings")
+    def settings_button(self, sender):
+        open_settings()
+
+    @rumps.clicked("History")
+    def history_button(self, sender):
+        open_history()
+
+    @rumps.clicked("On/Off")
     def onoff(self, sender):
         if sender.state == 0:
             self._start_listener()
@@ -23,10 +32,6 @@ class LatexOrcApplication(rumps.App):
             self._stop_listener()
             self.icon = './icons/menu_bar_off.png'
             sender.state = 0
-
-    @rumps.clicked("Settings")
-    def settings_button(self, sender):
-        open_settings()
 
     def keyboard_q_monitoring(self):
         while True:
@@ -48,8 +53,14 @@ class LatexOrcApplication(rumps.App):
             if err:
                 rumps.notification(**MessageHelper(ORC_ERROR, result).to_json())
             else:
-                to_clip(get_formula(result))
-                rumps.notification(**MessageHelper(SUCCESS).to_json())
+                formula = get_formula(result)
+                if formula:
+                    for fs in formula:
+                        save_history(fs)
+                    to_clip('\n'.join(formula))
+                    rumps.notification(**MessageHelper(SUCCESS).to_json())
+                else:
+                    rumps.notification(**MessageHelper(ORC_ERROR, 'Formula not recognized.').to_json())
         else:
             rumps.notification(**MessageHelper(NO_COPY_ERROR).to_json())
 
