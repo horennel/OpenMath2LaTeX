@@ -6,11 +6,15 @@ import webbrowser
 import pyperclip
 from PIL import ImageGrab
 
-from backend import ConfigModel, SETTINGS_HOST, SETTINGS_PORT
+from backend import ConfigModel, HistoryModel, SETTINGS_HOST, SETTINGS_PORT
 
 
 def get_config():
     return ConfigModel.select().first()
+
+
+def save_history(latex):
+    HistoryModel(context=latex).save()
 
 
 def get_image():
@@ -26,13 +30,18 @@ def get_image():
 
 
 def get_formula(chat_info):
-    pattern = r"\$\$(.*?)\$\$"
+    pattern = r"\$\$([\s\S]*?)\$\$"
     matches = re.findall(pattern, chat_info)
-    return '\n'.join(matches)
+    return matches
 
 
 def open_settings():
     url = f"http://{SETTINGS_HOST}:{SETTINGS_PORT}/config"
+    webbrowser.open(url)
+
+
+def open_history():
+    url = f"http://{SETTINGS_HOST}:{SETTINGS_PORT}/history"
     webbrowser.open(url)
 
 
