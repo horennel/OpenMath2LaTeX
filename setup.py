@@ -26,10 +26,10 @@ OPTIONS = {
     'includes': ['backend', 'tools'],
     'plist': {
         'LSUIElement': True,  # no icon in the dock
-        'CFBundleName': 'MyTESTapp',  # Application Name
-        'CFBundleDisplayName': 'MyTESTapp',  # Application Display Name
+        'CFBundleName': 'OpenMath2LaTex',  # Application Name
+        'CFBundleDisplayName': 'OpenMath2LaTex',  # Application Display Name
         'CFBundleVersion': '0.01',
-        'CFBundleIdentifier': 'MyTESTapp',
+        'CFBundleIdentifier': 'OpenMath2LaTex',
     },
     'resources': [
         'icons',
