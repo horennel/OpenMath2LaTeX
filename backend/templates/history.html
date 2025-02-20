@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}配置页面{% endblock %}
-{% block script %}<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>{% endblock %}
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock %}
 {% block main %}
 <main>
     <h1>历史记录</h1>
@@ -12,14 +14,12 @@
         </tr>
         </thead>
         <tbody>
+        {% for hsy in history %}
         <tr>
-            <td>2023-10-01 00:00:00</td>
-            <td>$$E = mc^2$$</td>
+            <td>{{ hsy.create_time }}</td>
+            <td>$${{ hsy.context }}$$</td>
         </tr>
-        <tr>
-            <td>2023-10-01 00:00:00</td>
-            <td>$$|R_n(x)| \leq \frac{M}{(n+1)!} |x|^{n+1}, \lim_{x \to 0} \frac{R_n(x)}{x^n} = 0$$</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </main>

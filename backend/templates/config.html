@@ -44,12 +44,13 @@
         <div class="form-group">
             <label for="key_option">按键选择:</label>
             <select id="key_option" name="button_select">
-                {% if button_select == 'option' %}
+                {% if cfg.button_select == 'option' %}
                 <option value="option" selected>option</option>
                 {% else %}
                 <option value="option">option</option>
                 {% endif %}
-                {% if button_select == 'control' %}
+
+                {% if cfg.button_select == 'control' %}
                 <option value="control" selected>control</option>
                 {% else %}
                 <option value="control">control</option>
