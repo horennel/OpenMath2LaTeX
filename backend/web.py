@@ -22,26 +22,13 @@ app.mount('/static', StaticFiles(directory=work_path + '/backend/templates'), na
 @app.get('/config', response_class=HTMLResponse)
 async def config(request: Request):
     cfg = ConfigModel.select().first()
-    if cfg:
-        return templates.TemplateResponse('config.html', {'request': request, 'cfg': cfg})
-    else:
-        return templates.TemplateResponse('config.html', {'request': request, 'cfg': None})
+    return templates.TemplateResponse('config.html', {'request': request, 'cfg': cfg})
 
 
 @app.post('/config')
-async def index(request: Request):
+async def save_config(request: Request):
     cfg_data = await request.form()
-    cfg = ConfigModel.select().first()
-    if cfg:
-        cfg.base_url = cfg_data['base_url']
-        cfg.api_key = cfg_data['api_key']
-        cfg.model = cfg_data['model']
-        cfg.button_time = cfg_data['button_time']
-        cfg.button_select = cfg_data['button_select']
-        cfg.save()
-    else:
-        ConfigModel.create(base_url=cfg_data['base_url'], api_key=cfg_data['api_key'], model=cfg_data['model'],
-                           button_time=cfg_data['button_time'], button_select=cfg_data['button_select'])
+    _save_config(cfg_data)
     return RedirectResponse(url="/config", status_code=303)
 
 
@@ -55,12 +42,27 @@ async def history(request: Request):
     })
 
 
+def _save_config(cfg_data):
+    cfg = ConfigModel.select().first()
+    if cfg:
+        cfg.base_url = cfg_data['base_url']
+        cfg.api_key = cfg_data['api_key']
+        cfg.model = cfg_data['model']
+        cfg.button_time = cfg_data['button_time']
+        cfg.button_select = cfg_data['button_select']
+        cfg.save()
+    else:
+        ConfigModel.create(base_url=cfg_data['base_url'], api_key=cfg_data['api_key'], model=cfg_data['model'],
+                           button_time=cfg_data['button_time'], button_select=cfg_data['button_select'])
+
+
 def keep_last_50_records():
     total_count = HistoryModel.select().count()
     if total_count > 50:
-        records_to_delete = total_count - 50
-        query = HistoryModel.select().order_by(HistoryModel.create_time).limit(records_to_delete)
-        query.delete().execute()
+        query = HistoryModel.delete().where(HistoryModel.id.in_(
+            HistoryModel.select(HistoryModel.id).order_by(HistoryModel.create_time).limit(total_count - 50)
+        ))
+        query.execute()
 
 
 def start_web():
