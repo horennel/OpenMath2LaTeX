@@ -80,6 +80,27 @@ python3 setup.py py2app
 dist/OpenMath2LaTeX.app/Contents/MacOS/OpenMath2LaTeX
 ```
 
+### 我的基础环境和构建软件版本
+
+- 我是以系统自带的Python来构建虚拟环境，Python和基础库版本如下：
+
+```angular2html
+horennel@mac ~ % python3 --version
+Python 3.9.6
+horennel@mac ~ % pip3 list        
+Package    Version
+---------- -------
+altgraph   0.17.2
+future     0.18.2
+macholib   1.15.2
+pip        21.2.4
+setuptools 58.0.4
+six        1.15.0
+wheel      0.37.0
+```
+
+- 注意setuptools和wheel的版本不能过高，不然会引发`ModuleNotFoundError: No module named 'imp'`错误，这是py2app导致的
+
 ### 致谢和技术栈
 
 - [图标网站作者ELÍAS的个人主页](https://eliasruiz.com/)
