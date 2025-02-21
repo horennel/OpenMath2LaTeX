@@ -1,6 +1,6 @@
 # OpenMath2LaTeX
 
-## 一个基于openai api的数学公式ORC识别的macOS菜单栏应用程序
+## 一个基于openai api的数学公式OCR识别的macOS菜单栏应用程序
 
 ### 该应用程序仅适用于macOS⚠️
 
@@ -77,12 +77,12 @@ dist/OpenMath2LaTeX.app/Contents/MacOS/OpenMath2LaTeX
 ### 致谢和技术栈
 
 - [图标网站作者ELÍAS的个人主页](https://eliasruiz.com/)
-- [ORC识别：openai-python](https://github.com/openai/openai-python)
+- [OCR识别：openai-python](https://github.com/openai/openai-python)
 - [复制和粘贴剪贴板：pyperclip](https://github.com/asweigart/pyperclip)
 - [macOS菜单栏应用程序：rumps](https://github.com/jaredks/rumps)
 - [macOS应用程序构建：py2app](https://github.com/ronaldoussoren/py2app)
 - [图像处理：pillow](https://github.com/python-pillow/Pillow)
 - [web服务：fastapi](https://github.com/fastapi/fastapi)
-- [orm数据库模型：peewee](https://github.com/coleifer/peewee)
+- [ORM数据库模型：peewee](https://github.com/coleifer/peewee)
 - [键盘事件监控：pynput](https://github.com/moses-palmer/pynput)
 - [本地数据库：SQLite](https://www.sqlite.org/)
