@@ -3,12 +3,12 @@ from threading import Thread
 import rumps
 
 from tools import create_new_listener, stop_listener, open_settings, keyboard_q, get_config, MessageHelper, get_image, \
-    OpenAIHelper, to_clip, get_formula, start_key_listener, CFG_ERROR, ORC_ERROR, SUCCESS, NO_COPY_ERROR, WAIT, \
+    OpenAIHelper, to_clip, get_formula, start_key_listener, CFG_ERROR, OCR_ERROR, SUCCESS, NO_COPY_ERROR, WAIT, \
     open_history, save_history
 from backend import start_web
 
 
-class LatexOrcApplication(rumps.App):
+class LatexOCRApplication(rumps.App):
     def __init__(self, name):
         super().__init__(name=name, icon='./icons/menu_bar_off.png', quit_button="Quit")
         self.keyboard_listener = None
@@ -51,7 +51,7 @@ class LatexOrcApplication(rumps.App):
             rumps.notification(**MessageHelper(WAIT).to_json())
             err, result = OpenAIHelper(cfg.base_url, cfg.api_key, cfg.model).chat(image)
             if err:
-                rumps.notification(**MessageHelper(ORC_ERROR, result).to_json())
+                rumps.notification(**MessageHelper(OCR_ERROR, result).to_json())
             else:
                 formula = get_formula(result)
                 if formula:
@@ -60,7 +60,7 @@ class LatexOrcApplication(rumps.App):
                     to_clip('\n'.join(formula))
                     rumps.notification(**MessageHelper(SUCCESS).to_json())
                 else:
-                    rumps.notification(**MessageHelper(ORC_ERROR, 'Formula not recognized.').to_json())
+                    rumps.notification(**MessageHelper(OCR_ERROR, 'Formula not recognized.').to_json())
         else:
             rumps.notification(**MessageHelper(NO_COPY_ERROR).to_json())
 
@@ -78,4 +78,4 @@ class LatexOrcApplication(rumps.App):
 
 
 if __name__ == "__main__":
-    LatexOrcApplication(name='').run()
+    LatexOCRApplication(name='').run()
