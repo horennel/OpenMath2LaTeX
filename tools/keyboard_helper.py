@@ -20,7 +20,7 @@ def on_release(key):
         press_time = key_press_times[key]['press_time']
         if press_time:
             duration = time.time() - press_time
-            if duration > 1.5:
+            if duration > 1:
                 keyboard_q.put({
                     'keyboard': 'option' if key == keyboard.Key.alt else 'control',
                     'duration': duration
