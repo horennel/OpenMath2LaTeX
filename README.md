@@ -19,7 +19,12 @@
 git clone https://github.com/horennel/OpenMath2LaTeX.git
 ```
 
-- 不要使用conda的虚拟环境来构建该应用程序⚠️
+- 不要使用conda的虚拟环境来构建该应用程序⚠️，如果你在conda base中请退出，如果未安装conda，请忽略这一条
+
+```angular2html
+conda deactivate
+```
+
 - 在项目里创建虚拟环境和进入虚拟环境
 
 ```angular2html
