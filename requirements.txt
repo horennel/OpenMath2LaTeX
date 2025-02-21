@@ -11,3 +11,4 @@ uvicorn==0.34.0
 jinja2
 python-multipart
 py2app
+wheel==0.37.0
