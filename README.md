@@ -1,6 +1,6 @@
 # OpenMath2LaTeX
 
-## 一个基于openai api的数学公式的macOS菜单栏应用程序
+## 一个基于openai api的数学公式ORC识别的macOS菜单栏应用程序
 
 ### 该应用程序仅适用于macOS⚠️
 
