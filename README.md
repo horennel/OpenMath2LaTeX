@@ -7,17 +7,25 @@
 ### 效果图
 
 ![menubar_off.jpg](assets%2Fmenubar_off.jpg)
-![menubar_on.jpg](assets%2Fmenubar_off.jpg)
+![menubar_on.jpg](assets%2Fmenubar_on.jpg)
 ![history.jpg](assets%2Fhistory.jpg)
 ![settings.jpg](assets%2Fsettings.jpg)
 
-### 如何安装
+### 如何构建和安装
 
-- 不要使用conda的虚拟环境来构建该应用程序⚠️
 - 克隆库
 
 ```angular2html
 git clone https://github.com/horennel/OpenMath2LaTeX.git
+```
+
+- 不要使用conda的虚拟环境来构建该应用程序⚠️
+- 在项目里创建虚拟环境和进入虚拟环境
+
+```angular2html
+cd OpenMath2LaTeX
+python3 -m venv env
+source env/bin/activate
 ```
 
 - 安装依赖环境
@@ -33,6 +41,9 @@ python3 setup.py py2app
 ```
 
 - 将dist中的OpenMath2LaTeX.app移动到应用程序文件夹即可
+
+
+- 具体可以查看py2app的文档
 
 ### 如何使用
 
@@ -54,6 +65,14 @@ python3 setup.py py2app
     - 查看通知的提示，识别成功后，会收到通知栏的通知
     - 成功识别后，，即可粘贴Latex公式到任意地方
 - 点击history可查看历史记录，并复制latex公式到剪切板
+
+### 如何调试
+
+- 打开终端
+
+```angular2html
+dist/OpenMath2LaTeX.app/Contents/MacOS/OpenMath2LaTeX
+```
 
 ### 致谢和技术栈
 
