@@ -48,9 +48,6 @@ python3 setup.py py2app
 
 - 将dist中的OpenMath2LaTeX.app移动到应用程序文件夹即可
 
-
-- 具体可以查看py2app的文档
-
 ### 如何使用
 
 - 权限（⚠️重要）
@@ -79,6 +76,8 @@ python3 setup.py py2app
 ```angular2html
 dist/OpenMath2LaTeX.app/Contents/MacOS/OpenMath2LaTeX
 ```
+
+- 具体可以查看py2app的文档
 
 ### 我的基础环境和构建软件版本
 
