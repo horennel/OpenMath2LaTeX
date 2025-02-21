@@ -1,26 +1,42 @@
 {% extends 'base.html' %}
 {% block title %}配置页面{% endblock %}
 {% block script %}
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 {% block main %}
-<main>
-    <h1>历史记录</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>时间</th>
-            <th>公式</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for hsy in history %}
-        <tr>
-            <td>{{ hsy.create_time }}</td>
-            <td>$${{ hsy.context }}$$</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</main>
+    <main>
+        <h1>历史记录</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>公式</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hsy in history %}
+                <tr>
+                    <td>{{ hsy.create_time }}</td>
+                    <td onclick="copyContent(this)">
+                        <span style="display:none;">{{ hsy.context }}</span>
+                        $${{ hsy.context }}$$
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <script>
+        function copyContent(tdElement) {
+            var spanElement = tdElement.querySelector('span');
+            var valueToCopy = spanElement.textContent || spanElement.innerText;
+            var textArea = document.createElement("textarea");
+            textArea.value = valueToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert("内容已复制: " + valueToCopy);
+        }
+    </script>
 {% endblock %}
