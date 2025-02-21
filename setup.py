@@ -35,6 +35,7 @@ OPTIONS = {
         'icons',
         'backend',
         'tools',
+        'LICENSE',
     ]
 }
 
